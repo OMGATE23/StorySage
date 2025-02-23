@@ -1,7 +1,10 @@
-import { Outlet } from "react-router-dom";
-import Logout from "./components/Logout";
+import { JSX } from "react";
+import Logout from "./Logout";
 
-export default function Layout() {
+interface Props {
+  children: JSX.Element;
+}
+export default function SignInPageTemplate(props: Props) {
   return (
     <div className="relative h-[100dvh] flex justify-center items-center overflow-hidden">
       <Logout />
@@ -17,7 +20,7 @@ export default function Layout() {
 
       <div className="relative z-10 flex flex-col gap-0 justify-center items-center">
         <img src="/logo.png" className="w-[320px]" />
-        <Outlet />
+        <div className="relative top-[-64px]">{props.children}</div>
       </div>
     </div>
   );
