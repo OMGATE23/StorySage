@@ -2,3 +2,6 @@ venv
 node_modules
 .env
 package-lock.json
+temp
+*.pyc
+**__pycache__

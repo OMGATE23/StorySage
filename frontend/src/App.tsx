@@ -6,11 +6,10 @@ import {
 } from "react-router-dom";
 import { SignIn, SignUp, useAuth } from "@clerk/clerk-react";
 import Layout from "./Layout";
-import MakeStory from "./components/MakeStory";
-import Clone from "./components/Clone";
-import Video from "./components/Video";
-import SigninPage from "./components/SignInPage";
+import MakeStory from "./pages/home";
+import Clone from "./pages/clone";
 import SignInPageTemplate from "./components/SignInPage";
+import "./App.css";
 
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -57,7 +56,6 @@ export default function App() {
         >
           <Route index element={<MakeStory />} />
           <Route path="clone" element={<Clone />} />
-          <Route path="video" element={<Video />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/sign-in" replace />} />

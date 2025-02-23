@@ -6,3 +6,4 @@ openai-whisper==20240930
 pip==24.2
 elevenlabs==1.51.0
 python-dotenv==1.0.1
+videodb==0.2.10
