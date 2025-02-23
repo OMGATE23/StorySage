@@ -14,7 +14,7 @@ export default function Layout() {
       </video>
 
       <div className="relative z-10 flex flex-col gap-0 justify-center items-center">
-        <img src="/image.png" className="w-[320px]" />
+        <img src="/logo.png" className="w-[320px]" />
         <Outlet />
       </div>
     </div>

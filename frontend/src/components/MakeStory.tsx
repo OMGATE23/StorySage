@@ -1,13 +1,16 @@
 import { useState } from "react";
 import VoiceChoice from "./VoiceChoice";
+import { useUser } from "@clerk/clerk-react";
 
 export default function MakeStory() {
+  const { isLoaded } = useUser();
   const [isRecording, setIsRecording] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
   );
+  const [selectedVoice, setSelectedVoice] = useState<string | null>(null);
 
   const startRecording = async () => {
     try {
@@ -61,6 +64,10 @@ export default function MakeStory() {
     }
   };
 
+  if (!isLoaded) {
+    return <></>;
+  }
+
   return (
     <div className="relative top-[-64px] w-[100%] px-12 h-[408px] bg-[#0A324E] bg-gradient-to-b from-black/45 to-[rgba(0,0,0,0.1)]/45 border-[10px] border-white rounded-[48px] shadow-[0_11px_15px_rgba(0,0,0,0.25),0_9px_46px_rgba(0,0,0,0.5)] flex flex-col justify-center p-6">
       <h2 className="text-white text-4xl font-bold text-center">
@@ -68,7 +75,10 @@ export default function MakeStory() {
       </h2>
 
       <div className="flex items-center bg-[#002438] bg-gradient-to-b from-black/25 to-[rgba(0,0,0,0.2)/25 border-b-[3px] border-fuchsia-950 rounded-[2rem] mt-6 px-4 py-3 w-full shadow-md">
-        <VoiceChoice />
+        <VoiceChoice
+          selectedVoice={selectedVoice}
+          setSelectedVoice={(voice) => setSelectedVoice(voice)}
+        />
 
         <input
           type="text"
