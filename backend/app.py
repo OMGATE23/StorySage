@@ -80,7 +80,6 @@ def make_movie():
 
         movie_maker = MovieGenerator()
         video_link = movie_maker.create_movie(story_prompt, voice_id)
-        video_link = "https://stream.videodb.io/v3/published/manifests/5aae2bed-1e17-4c44-8fef-61407497b419.m3u8"
         return jsonify({"video_link": video_link}), 200
 
     except Exception as e:
