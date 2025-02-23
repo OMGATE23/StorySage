@@ -1,40 +1,43 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import whisper
-import os
+from elevenlabs.client import ElevenLabs
 from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-model = whisper.load_model("base")
 
-@app.route('/', methods=['POST'])
-def transcribe_audio():
-    if 'audio' not in request.files:
-        return jsonify({"error": "No audio file provided"}), 400
+client = ElevenLabs()
+
+@app.route('/clone_voice', methods=['POST'])
+def clone_voice():
+    if 'audio' not in request.files or 'name' not in request.form:
+        return jsonify({"error": "Audio file and name are required"}), 400
     
     audio_file = request.files['audio']
+    name_of_voice = request.form['name']
+    description = request.form.get('description', 'Cloned voice')
+    
     if audio_file.filename == '':
         return jsonify({"error": "No selected file"}), 400
     
     filename = secure_filename(audio_file.filename)
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     audio_file.save(file_path)
-    print("HELLO")
+    
     try:
-        result = model.transcribe(file_path)
-        transcription = result['text']
-        print(transcription)
+        voice = client.clone(name=name_of_voice, files=[file_path], description=description)
+        cloned_voice_id = voice.voice_id
     except Exception as e:
         print(e)
         return jsonify({"error": str(e)}), 500
     finally:
         os.remove(file_path)
     
-    return jsonify({"transcription": transcription})
+    return jsonify({"success": True, "voice_id": cloned_voice_id})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
