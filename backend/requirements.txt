@@ -1,0 +1,6 @@
+cryptography==44.0.1
+firebase-admin==6.6.0
+Flask-Cors==5.0.0
+grpcio-status==1.70.0
+openai-whisper==20240930
+pip==24.2
