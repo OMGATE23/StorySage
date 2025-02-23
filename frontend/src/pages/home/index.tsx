@@ -97,7 +97,7 @@ export default function MakeStory() {
 
   return (
     <>
-      <div className="relative top-[-64px] w-[100%] px-12 h-[408px] bg-[#0A324E] bg-gradient-to-b from-black/45 to-[rgba(0,0,0,0.0)]/45 border-[10px] border-white rounded-[48px] shadow-[0_11px_15px_rgba(0,0,0,0.25),0_9px_46px_rgba(0,0,0,0.5)] flex flex-col justify-center p-6">
+      <div className="relative top-[-64px] w-[50vw] px-12 h-[408px] bg-[#0A324E] bg-gradient-to-b from-black/45 to-[rgba(0,0,0,0.0)]/45 border-[10px] border-white rounded-[48px] shadow-[0_11px_15px_rgba(0,0,0,0.25),0_9px_46px_rgba(0,0,0,0.5)] flex flex-col justify-center p-6">
         <h2 className="text-[#F0AC2A] text-4xl font-bold text-center font-quicksand">
           What story would you like?
         </h2>
