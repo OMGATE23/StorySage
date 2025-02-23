@@ -19,6 +19,10 @@ class ElevenLabsTool:
         )
         return voice
 
-    def synthesis_text(self, voice:Voice, text_to_synthesis:str):
-        audio = self.client.generate(text=text_to_synthesis, voice=voice,model="eleven_multilingual_v2")
+    def synthesis_text(self, voiceover:str, voice_id:str):
+        audio = self.client.generate(
+            text=voiceover,
+            voice=voice_id,
+            model="eleven_multilingual_v2"
+        )
         return audio

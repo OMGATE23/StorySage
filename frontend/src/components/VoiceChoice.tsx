@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useStorage from "../hooks/useStorage";
 
@@ -25,7 +24,7 @@ export default function VoiceSelector({
       const fetchedVoices = await getAllVoices();
       setVoices(fetchedVoices);
       if (fetchedVoices.length > 0) {
-        setSelectedVoice(fetchedVoices[0].voiceId);
+        setSelectedVoice(fetchedVoices[1].voiceId);
       }
     }
     fetchVoices();
@@ -47,12 +46,12 @@ export default function VoiceSelector({
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative z-20" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center border-4 border-amber-400 hover:bg-teal-200 transition"
+        className="w-14 h-14 cursor-pointer bg-teal-100 rounded-full flex items-center justify-center border-4 border-amber-400 hover:bg-teal-200 transition"
       >
-        <User className="w-6 h-6 text-teal-600" />
+        <img src="/grandma.png" className="w-full rounded-full text-teal-600" />
       </button>
 
       {isOpen && (
@@ -62,7 +61,7 @@ export default function VoiceSelector({
         >
           <div className="bg-white rounded-3xl p-2">
             <div className="bg-amber-400 rounded-2xl p-2">
-              <div className="bg-slate-200 rounded-2xl overflow-hidden">
+              <div className="bg-white rounded-2xl overflow-hidden">
                 <div className="bg-amber-400 py-3 px-4">
                   <div
                     className="text-white text-xl font-bold text-center"
@@ -81,14 +80,23 @@ export default function VoiceSelector({
                           setSelectedVoice(voice.voiceId);
                           setIsOpen(false);
                         }}
-                        className={`flex items-center gap-3 w-full px-4 py-2 rounded-xl text-lg font-semibold transition ${
+                        className={`flex items-center gap-3 w-full px-4 py-2 rounded-xl text-lg font-semibold transition  cursor-pointer ${
                           selectedVoice === voice.voiceName
                             ? "bg-amber-400 text-white"
-                            : "hover:bg-slate-300"
-                        }`}
+                            : "hover:bg-slate-100"
+                        } ${selectedVoice === voice.voiceId && "bg-slate-200"}`}
                       >
-                        <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center border-4 border-amber-400">
-                          <User className="w-6 h-6 text-teal-600" />
+                        <div
+                          className={`w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center border-4 ${selectedVoice === voice.voiceId ? "border-amber-400" : "border-transparent"}`}
+                        >
+                          <img
+                            src={
+                              voice.voiceName.toLowerCase() === "grandma"
+                                ? "/grandma.png"
+                                : "/grandpa.png"
+                            }
+                            className="w-full rounded-full text-teal-600"
+                          />
                         </div>
                         {voice.voiceName}
                       </button>
