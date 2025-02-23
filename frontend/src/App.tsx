@@ -9,6 +9,8 @@ import Layout from "./Layout";
 import MakeStory from "./components/MakeStory";
 import Clone from "./components/Clone";
 import Video from "./components/Video";
+import SigninPage from "./components/SignInPage";
+import SignInPageTemplate from "./components/SignInPage";
 
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -28,8 +30,22 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
+        <Route
+          path="/sign-in"
+          element={
+            <SignInPageTemplate>
+              <SignIn />
+            </SignInPageTemplate>
+          }
+        />
+        <Route
+          path="/sign-up"
+          element={
+            <SignInPageTemplate>
+              <SignUp />
+            </SignInPageTemplate>
+          }
+        />
 
         <Route
           path="/"
