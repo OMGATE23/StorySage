@@ -30,8 +30,6 @@ def create_image_from_text(prompt: str) -> str:
     )
     return result["images"][0]["url"]
 
-    # return "https://fal.media/files/panda/zbpqNxzxpttDeZhDqZQwb_13277f9159b241209db7e199d743f25a.jpg"
-
 
 IMAGE_TO_VIDEO_PROMPT = """
 Transform this scene into a short animation:
@@ -62,4 +60,3 @@ def create_video_from_image(image_url: str, duration:int=5):
     )
     return result["video"]["url"]
 
-    return "https://v3.fal.media/files/elephant/RcW3m5cAwSwUEfhXuJTV3_output.mp4"
